@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from "vue";
 import axiosClient from "../axios";
 import router from "../router";
@@ -17,14 +17,14 @@ const errors = ref({});
 
 const register = async () => {
   try {
-    let response = await axiosClient.post("/api/register", {
+    let response = await axiosClient.post("/register", {
       name: data.value.name,
       email: data.value.email,
       password: data.value.password,
     });
     
     // Redirect ke halaman login setelah sukses
-    router.push({ path: "/" }); 
+    router.push({ path: "/otp.register" }); 
     Swal.fire({
                 icon: 'success',
                 title: 'Register Berhasil!'
@@ -45,12 +45,85 @@ const register = async () => {
          errors.value = error.response?.data || { message: "Terjadi kesalahan." };
   }
 };
+</script> -->
+
+<script setup>
+import { ref } from "vue";
+import GuestLayout from "../components/GuestLayout.vue";
+import axiosClient from "../axios";
+import router from "../router";
+import { RouterLink } from "vue-router";
+import Swal from "sweetalert2"; // Import SweetAlert2
+
+const data = ref({
+    name: "",
+    email: "",
+    password: "" // Konfirmasi password jika diperlukan
+});
+
+const errorMessage = ref(""); // Untuk menampilkan pesan error jika registrasi gagal
+
+const register = async () => {
+    console.log("Tombol register ditekan");
+
+    try {
+        const response = await axiosClient.post("/api/register", 
+        data.value);
+        console.log("Registrasi berhasil!");
+
+        Swal.fire({
+            icon: "info",
+            title: "OTP Terkirim!",
+            text: "Silakan cek email Anda dan masukkan kode OTP.",
+            confirmButtonText: "OK"
+        });
+        localStorage.setItem("email", data.value.email);
+        // Redirect ke halaman OTP jika berhasil
+        router.push("/otp.register");
+    } catch (error) {
+        console.error("Error:", error);
+
+        if (error.response) {
+            if (error.response.status === 422) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Validasi Gagal!",
+                    text: "Periksa kembali data yang Anda masukkan.",
+                });
+            } else if (error.response.status === 409) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Email sudah terdaftar!",
+                    text: "Gunakan email lain atau lakukan login.",
+                });
+            } else if (error.response.status === 500) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Server Error!",
+                    text: "Terjadi kesalahan di server. Coba lagi nanti.",
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Registrasi Gagal!",
+                    text: error.response.data.message || "Terjadi kesalahan, coba lagi.",
+                });
+            }
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Koneksi Gagal!",
+                text: "Tidak dapat terhubung ke server.",
+            });
+        }
+    }
+};
 </script>
 
 <template>
     <GuestLayout>
         <div
-            class="w-150 h-130 mt-25 ml-135 rounded-md bg-white px-3 py-1.5  outline-5 -outline-offset-1 outline-gray-900  focus:outline-5 focus:-outline-offset-3">
+            class="w-150 h-130 mt-18 ml-135 rounded-md bg-white px-3 py-1.5  outline-5 -outline-offset-1 outline-gray-900  focus:outline-5 focus:-outline-offset-3">
 
             <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
                 Buat Akun
@@ -90,7 +163,7 @@ const register = async () => {
                         <button type="submit"
                             class="mt-10 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                             Daftar
-                            <router-link to="/" class="font-semibold text-indigo-600 hover:text-indigo-500"></router-link>
+                            <router-link to="/otp.register" class="font-semibold text-indigo-600 hover:text-indigo-500"></router-link>
                             <!-- <a href="/" class="font-semibold text-indigo-600 hover:text-indigo-500"></a> -->
                         </button>
                     </div>

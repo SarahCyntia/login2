@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\OtpController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +32,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  * @method name() "POST"
  */
 Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route::get('/send-email', [OtpController::class, 'sendOtp'])->name('otp'); 
+
+Route::post('/verify-otp', [OtpController::class, 'verifyOtp']);

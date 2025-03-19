@@ -1,16 +1,20 @@
 <script setup>
 import { ref } from "vue";
-// import GuestLayout from "./components/GuestLayout.vue";
+import GuestLayout from "../components/GuestLayout.vue";
 import axiosClient from "../axios";
 import router from "../router";
-import Swal from "sweetalert2";
+import { RouterLink } from "vue-router";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 const data = ref({
     email: "",
     password: "",
 });
 
+const errorMessage = ref("") //tambahan
+
 const submitLogin = async () => {
+    console.log("Tombol login ditekan");
   try {
     const response = await axiosClient.post("/api/login", {
       email: data.value.email,
@@ -41,7 +45,7 @@ const submitLogin = async () => {
 
 <template>
     <GuestLayout>
-        <div class="w-150 h-135 mt-25 ml-135 rounded-md bg-white px-3 py-1.5  outline-5 -outline-offset-1 outline-gray-900  focus:outline-5 focus:-outline-offset-3">
+        <div class="w-150 h-135 mt-15 ml-135 rounded-md bg-white px-3 py-1.5  outline-5 -outline-offset-1 outline-gray-900  focus:outline-5 focus:-outline-offset-3">
         <h2 class="mt-10 text-center text-2xl/30 font-bold tracking-tight text-gray-900">
             Masuk
         </h2>
@@ -79,7 +83,7 @@ const submitLogin = async () => {
                     </button>
                 </div>
             </form>
-
+            
             <p class="mt-10 text-center text-sm/6 text-gray-500">
                 Tidak memiliki akun?
                 {{ " " }}
