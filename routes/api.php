@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\VerifikasiController;
+use App\Http\Controllers\LoginOtpController;
 use App\Http\Controllers\OtpController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendEmail;
@@ -40,3 +42,6 @@ Route::get('/', function () {
 // Route::get('/send-email', [OtpController::class, 'sendOtp'])->name('otp'); 
 
 Route::post('/verify-otp', [OtpController::class, 'verifyOtp']);
+
+Route::post('/send-otp', [LoginOtpController::class, 'sendOTP']);
+Route::post('/verify', [VerifikasiController::class, 'verify']);

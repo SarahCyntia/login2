@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>santrikoding.com</title>
+    <title></title>
 </head>
 <body>
     <h3>{{ $otp }}</h3>
     {{-- <h4>{{ $data['body'] }}</h4> --}}
    
-    <p>Terimakasih</p>
+    <p>Halo</p>
 </body>
 </html>

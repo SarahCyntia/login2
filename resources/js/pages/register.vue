@@ -67,7 +67,7 @@ const register = async () => {
     console.log("Tombol register ditekan");
 
     try {
-        const response = await axiosClient.post("/api/register", 
+        const response = await axiosClient.post("/register", 
         data.value);
         console.log("Registrasi berhasil!");
 

@@ -54,7 +54,7 @@ if (!email || !otp.value) {
 }
 
 try {
-        const response = await axiosClient.post("/api/verify-otp", {
+        const response = await axiosClient.post("/verify-otp", {
             email: email,
             otp: otp.value
         });
@@ -68,7 +68,7 @@ try {
                 icon: 'success',
                 title: 'Login Berhasil!',
                 // text: 'Anda akan diarahkan ke halaman utama.'
-                text: 'Anda berhasil regis.'
+                text: 'Anda berhasil login.'
             });
             router.push('/');
         } else {

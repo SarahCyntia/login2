@@ -6,6 +6,7 @@ import Register from "./pages/register.vue";
 import Home from "./pages/home.vue";
 import OtpLogin from "./pages/otp.login.vue";
 import OtpRegister from "./pages/otp.register.vue";
+import LoginOtp from "./pages/loginotp.vue";
 
 
 
@@ -35,12 +36,12 @@ const routes = [
         path : "/otp.register",
         name : "otp",
         component : OtpRegister
+    },
+    {
+        path : "/loginotp",
+        name : "loginotp",
+        component : LoginOtp
     }
-    // {
-    //     path : "/loginotp",
-    //     name : "loginotp",
-    //     component : Loginotp
-    // }
 
 ];
 

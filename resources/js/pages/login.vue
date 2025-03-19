@@ -16,7 +16,7 @@ const errorMessage = ref("") //tambahan
 const submitLogin = async () => {
     console.log("Tombol login ditekan");
   try {
-    const response = await axiosClient.post("/api/login", {
+    const response = await axiosClient.post("/login", {
       email: data.value.email,
       password: data.value.password
     });
