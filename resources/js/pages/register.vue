@@ -169,6 +169,12 @@ const register = async () => {
                     </div>
                 </form>
                 <!-- <p class="mt-10 text-center text-sm/6 text-gray-500">
+                Sudah memiliki akun?
+                {{ " " }}
+                <router-link to="/login" class="font-semibold text-indigo-600 hover:text-indigo-500">masuk</router-link>
+                <a href="/register" class="font-semibold text-indigo-600 hover:text-indigo-500">Buat akun</a>
+            </p> -->
+                <!-- <p class="mt-10 text-center text-sm/6 text-gray-500">
                 Tidak memiliki akun?
                 Don't have account?
                 {{" "}}
